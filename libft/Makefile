@@ -20,11 +20,12 @@ OBJS_BONUS = $(SRC_BONUS:.c=.o)
 FLAGS = -Wall -Werror -Wextra
 
 .PHONY: all
-all: $(OBJS) $(HEADER)
+all: $(NAME)
+
+$(NAME) : $(OBJS) $(HEADER)
 	@ ar rcs $(LIB) $^
 	@ echo $(LIB) "successfully generated"
 
-$(NAME) : all
 
 .PHONY: bonus
 bonus: $(OBJS) $(OBJS_BONUS) $(HEADER)

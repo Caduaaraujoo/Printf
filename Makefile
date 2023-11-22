@@ -1,14 +1,16 @@
 NAME = libftprintf.a
 
-HEADERS = ft_printf.h
+HEADERS = ./includes/ft_printf.h
 
-SRC_FILES = ft_printf.c
+SRC_FILES = ./srcs/ft_printf.c
 
 OBJS = $(SRC_FILES:.c=.o)
 
 FLAGS = -Wall -Wextra -Werror
 
 $(NAME): $(OBJS)
+	$(MAKE) -C ./libft
+	cp ./libft/libft.a $(NAME)
 	@ ar rcs $(NAME) $^
 	@ echo $(NAME) "successfully generated"
 
@@ -21,11 +23,13 @@ all : $(NAME)
 
 .PHONY: clean
 clean:
-	@ rm -f *.o
+	$(MAKE) -C ./libft clean
+	@ rm -f ./srcs/*.o
 	@ echo "cleaned"
 
 .PHONY: fclean
 fclean: clean
+	$(MAKE) -C ./libft fclean
 	@ rm -f $(NAME)
 
 .PHONY: re
