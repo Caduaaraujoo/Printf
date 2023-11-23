@@ -6,7 +6,7 @@
 /*   By: caredua3 <caredua3@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 14:14:29 by caredua3          #+#    #+#             */
-/*   Updated: 2023/11/22 20:08:43 by caredua3         ###   ########.fr       */
+/*   Updated: 2023/11/23 20:51:49 by caredua3         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,19 +35,19 @@ void	ft_verify_type_print(char c, va_list args)
 	else if (c == 's')
 		ft_putstr_fd((char *)result.va_type_str, 1);
 	else if (c == 'p')
-		printf("");
+		printf("a");
 	else if (c == 'd')
 		ft_putnbr_fd(result.va_type_int, 1);
 	else if (c == 'i')
-		printf("");
+		printf("a");
 	else if (c == 'u')
-		printf("");
+		printf("a");
 	else if (c == 'x')
-		printf("");
+		printf("a");
 	else if (c == 'X')
-		printf("");
+		printf("a");
 	else if (c == '%')
-		printf("");
+		printf("a");
 }
 
 int	ft_printf(const char *value, ...)
@@ -67,6 +67,8 @@ int	ft_printf(const char *value, ...)
 			i += 2;
 			amount++;
 		}
+		if (!value[i])
+			break ;
 		ft_putchar_fd(value[i], 1);
 		amount++;
 		i++;
@@ -83,21 +85,37 @@ int	main(void)
 	r_original = 0;
 	r_myprint = 0;
 	r_myprint = ft_printf(" %c ", '0');
+	printf("\n");
 	r_original = printf(" %c ", '0');
-	// ft_printf(" %c", '0' - 256);
-	// printf(" %c", '0' - 256);
-	// ft_printf(" %c ", '0' + 256);
-	// printf(" %c ", '0' + 256);
-	// ft_printf(" %c %c %c ", '0', 0, '1');
-	// printf(" %c %c %c ", '0', 0, '1');
-	// ft_printf(" %c %c %c ", ' ', ' ', ' ');
-	// printf(" %c %c %c ", ' ', ' ', ' ');
-	// ft_printf(" %c %c %c ", '1', '2', '3');
-	// printf(" %c %c %c ", '1', '2', '3');
-	// ft_printf(" %c %c %c ", '2', '1', 0);
-	// printf(" %c %c %c ", '2', '1', 0);
-	// ft_printf(" %c %c %c ", 0, '1', '2');
-	// printf(" %c %c %c ", 0, '1', '2');
+	printf("\n");
+	r_myprint = ft_printf(" %c", '0' - 256);
+	printf("\n");
+	r_original = printf(" %c", '0' - 256);
+	printf("\n");
+	r_myprint = ft_printf(" %c ", '0' + 256);
+	printf("\n");
+	r_original = printf(" %c ", '0' + 256);
+	printf("\n");
+	r_myprint = ft_printf(" %c %c %c ", '0', 0, '1');
+	printf("\n");
+	r_original = printf(" %c %c %c ", '0', 0, '1');
+	printf("\n");
+	r_myprint = ft_printf(" %c %c %c ", ' ', ' ', ' ');
+	printf("\n");
+	r_original = printf(" %c %c %c ", ' ', ' ', ' ');
+	printf("\n");
+	r_myprint = ft_printf(" %c %c %c ", '1', '2', '3');
+	printf("\n");
+	r_original = printf(" %c %c %c ", '1', '2', '3');
+	printf("\n");
+	r_myprint = ft_printf(" %c %c %c ", '2', '1', 0);
+	printf("\n");
+	r_original = printf(" %c %c %c ", '2', '1', 0);
+	printf("\n");
+	r_myprint = ft_printf(" %c %c %c ", 0, '1', '2');
+	printf("\n");
+	r_original = printf(" %c %c %c ", 0, '1', '2');
+	printf("\n");
 
 	printf("RETORNO ORIGINAL : %d\n", r_original);
 	printf("RETORNO MINHA PRINTF : %d\n", r_myprint);
