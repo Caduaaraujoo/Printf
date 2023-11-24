@@ -2,7 +2,7 @@ NAME = libftprintf.a
 
 HEADERS = ./includes/ft_printf.h
 
-SRC_FILES = ./srcs/ft_printf.c
+SRC_FILES = ./srcs/ft_printf.c ./srcs/ft_putnbr_unsigned.c
 
 OBJS = $(SRC_FILES:.c=.o)
 
