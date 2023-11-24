@@ -6,11 +6,12 @@
 /*   By: caredua3 <caredua3@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 18:00:37 by caredua3          #+#    #+#             */
-/*   Updated: 2023/11/24 18:53:27 by caredua3         ###   ########.fr       */
+/*   Updated: 2023/11/24 19:44:30 by caredua3         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../includes/ft_printf.h"
+#include "../libft/libft.h"
 
 static void	ft_convert_int_for_char(int n, int fd)
 {

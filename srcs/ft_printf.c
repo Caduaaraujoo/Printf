@@ -6,7 +6,7 @@
 /*   By: caredua3 <caredua3@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 14:14:29 by caredua3          #+#    #+#             */
-/*   Updated: 2023/11/24 19:17:03 by caredua3         ###   ########.fr       */
+/*   Updated: 2023/11/24 20:03:27 by caredua3         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@
 	else if (c == 'i')
 		ft_putnbr_fd(result.va_type_int, 1);
 	else if (c == 'u')
-		ft_putnbr_unsigned(result.va_type_unsigned_int);
+		ft_putnbr_unsigned(result.va_type_unsigned_int, 1);
 	else if (c == 'x')
 		printf("x");
 	else if (c == 'X')
@@ -67,6 +67,13 @@
 	len = 0;
 	if (type == 'c')
 		return (1);
+	if (type == 'u')
+	{
+		str = ft_itoa(value_return.va_type_unsigned_int);
+		len = ft_strlen(str);
+		free(str);
+		return (len);
+	}
 	if (type != 's')
 	{
 		str = ft_itoa(value_return.va_type_int);
@@ -105,20 +112,20 @@ int	ft_printf(const char *value, ...)
 	return (amount);
 }
 
-// int	main(void)
-// {
-// 	int r_original;
-// 	int r_myprint;
+int	main(void)
+{
+	int r_original;
+	int r_myprint;
 
-// 	r_original = 0;
-// 	r_myprint = 0;
+	r_original = 0;
+	r_myprint = 0;
 
-// 	r_myprint = ft_printf(" %u ", -1);
-// 	printf("\n");
-// 	r_original = printf(" %u ", -1);
-// 	printf("\n");
+	r_myprint = ft_printf(" %u ", -100);
+	printf("\n");
+	r_original = printf(" %u ", -100);
+	printf("\n");
 
-// 	printf("RETORNO ORIGINAL : %d\n", r_original);
-// 	printf("RETORNO MINHA PRINTF : %d\n", r_myprint);
-// 	return (0);
-// }
+	printf("RETORNO ORIGINAL : %d\n", r_original);
+	printf("RETORNO MINHA PRINTF : %d\n", r_myprint);
+	return (0);
+}
