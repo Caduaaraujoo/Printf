@@ -6,7 +6,7 @@
 /*   By: caredua3 <caredua3@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 14:14:29 by caredua3          #+#    #+#             */
-/*   Updated: 2023/11/24 20:03:27 by caredua3         ###   ########.fr       */
+/*   Updated: 2023/11/25 19:23:33 by caredua3         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include <stdio.h>
 #include <limits.h>
 
- union u_return_value	ft_configure_va_arg(char c, va_list args)
+static union u_return_value	ft_configure_va_arg(char c, va_list args)
 {
 	union u_return_value	var_type;
 
@@ -25,14 +25,14 @@
 		if (var_type.va_type_str == NULL)
 			var_type.va_type_str = "(null)";
 	}
-	else if (c == 'u')
+	else if (c == 'u' || c == 'x' || c == 'X')
 		var_type.va_type_unsigned_int = va_arg(args, unsigned int);
 	else
 		var_type.va_type_int = va_arg(args, int);
 	return (var_type);
 }
 
- union u_return_value	ft_verify_type_print(char c, va_list args)
+static union u_return_value	ft_verify_type_print(char c, va_list args)
 {
 	union u_return_value	result;
 
@@ -50,33 +50,35 @@
 	else if (c == 'u')
 		ft_putnbr_unsigned(result.va_type_unsigned_int, 1);
 	else if (c == 'x')
-		printf("x");
+		result.va_type_str = ft_convert_dec_hex(result.va_type_unsigned_int, 'x');
 	else if (c == 'X')
-		printf("X");
+		result.va_type_str = ft_convert_dec_hex(result.va_type_unsigned_int, 'X');
 	else if (c == '%')
-		printf("porcent");
+		ft_putchar_fd(37, 1);
 
 	return(result);
 }
 
- int ft_length_printf(char type, union u_return_value value_return)
+static int ft_length_printf(char type, union u_return_value value_return)
 {
 	int	len;
 	char 	*str;
 
 	len = 0;
-	if (type == 'c')
+	if (type == 'c' || type == '%')
 		return (1);
-	if (type == 'u')
+	if (type == 'x' || type == 'X')
 	{
-		str = ft_itoa(value_return.va_type_unsigned_int);
-		len = ft_strlen(str);
-		free(str);
+		len = ft_strlen(value_return.va_type_str);
+		free(value_return.va_type_str);
 		return (len);
 	}
 	if (type != 's')
 	{
-		str = ft_itoa(value_return.va_type_int);
+		if (type == 'u')
+			str = ft_itoa_unsigned(value_return.va_type_unsigned_int);
+		else
+			str = ft_itoa(value_return.va_type_int);
 		len = ft_strlen(str);
 		free(str);
 		return (len);
@@ -112,20 +114,20 @@ int	ft_printf(const char *value, ...)
 	return (amount);
 }
 
-int	main(void)
-{
-	int r_original;
-	int r_myprint;
+// int	main(void)
+// {
+// 	int r_original;
+// 	int r_myprint;
 
-	r_original = 0;
-	r_myprint = 0;
+// 	r_original = 0;
+// 	r_myprint = 0;
 
-	r_myprint = ft_printf(" %u ", -100);
-	printf("\n");
-	r_original = printf(" %u ", -100);
-	printf("\n");
+// 	r_myprint = ft_printf(" %%%% ");
+// 	printf("\n");
+// 	r_original = printf(" %%%% ");
+// 	printf("\n");
 
-	printf("RETORNO ORIGINAL : %d\n", r_original);
-	printf("RETORNO MINHA PRINTF : %d\n", r_myprint);
-	return (0);
-}
+// 	printf("RETORNO ORIGINAL : %d\n", r_original);
+// 	printf("RETORNO MINHA PRINTF : %d\n", r_myprint);
+// 	return (0);
+// }

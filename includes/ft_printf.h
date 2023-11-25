@@ -6,7 +6,7 @@
 /*   By: caredua3 <caredua3@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 14:15:02 by caredua3          #+#    #+#             */
-/*   Updated: 2023/11/24 20:03:03 by caredua3         ###   ########.fr       */
+/*   Updated: 2023/11/25 19:22:49 by caredua3         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,16 @@
 # define FT_PRINTF_H
 # include <stdarg.h>
 
-union						u_return_value
+union				u_return_value
 {
-	unsigned int			va_type_unsigned_int;
-	int						va_type_int;
-	char					*va_type_str;
+	unsigned int	va_type_unsigned_int;
+	int				va_type_int;
+	char			*va_type_str;
 };
 
-void						ft_putnbr_unsigned(unsigned int number, int fd);
-int							ft_printf(const char *, ...);
-union u_return_value	ft_verify_type_print(char c, va_list args);
-union u_return_value	ft_configure_va_arg(char c, va_list args);
-int	ft_length_printf(char type, union u_return_value value_return);
+char				*ft_convert_dec_hex(unsigned int n, char x);
+char				*ft_itoa_unsigned(unsigned int n);
+void				ft_putnbr_unsigned(unsigned int number, int fd);
+int					ft_printf(const char *, ...);
 
 #endif
