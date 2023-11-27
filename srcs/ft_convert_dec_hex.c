@@ -6,7 +6,7 @@
 /*   By: caredua3 <caredua3@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/25 11:57:42 by caredua3          #+#    #+#             */
-/*   Updated: 2023/11/25 17:16:14 by caredua3         ###   ########.fr       */
+/*   Updated: 2023/11/26 14:54:40 by caredua3         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,13 +42,11 @@ static char	*ft_assemvly_hex(t_list *l_rest, char x)
 char	*ft_convert_dec_hex(unsigned int n, char x)
 {
 	int divider;
-	int rest;
 	t_list *l_rest;
 	t_list *new_node;
 	char *str_hex;
 
 	divider = -1;
-	rest = 0;
 	l_rest = NULL;
 	while (divider != 0)
 	{

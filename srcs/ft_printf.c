@@ -6,7 +6,7 @@
 /*   By: caredua3 <caredua3@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 14:14:29 by caredua3          #+#    #+#             */
-/*   Updated: 2023/11/25 19:23:33 by caredua3         ###   ########.fr       */
+/*   Updated: 2023/11/26 21:32:34 by caredua3         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ static union u_return_value	ft_verify_type_print(char c, va_list args)
 	else if (c == 'X')
 		result.va_type_str = ft_convert_dec_hex(result.va_type_unsigned_int, 'X');
 	else if (c == '%')
-		ft_putchar_fd(37, 1);
+		ft_putchar_fd('%', 1);
 
 	return(result);
 }
@@ -100,9 +100,19 @@ int	ft_printf(const char *value, ...)
 	{
 		if (value[i] == '%')
 		{
-			result_return = ft_verify_type_print(value[i + 1], args);
-			amount += ft_length_printf(value[i + 1], result_return);
-			i += 2;
+			if (value[i + 1] == '%')
+			{
+				ft_putchar_fd('%', 1);
+				amount++;
+				i += 2;
+				continue;
+			}
+			else
+			{
+				result_return = ft_verify_type_print(value[i + 1], args);
+				amount += ft_length_printf(value[i + 1], result_return);
+				i += 2;
+			}
 		}
 		if (!value[i])
 			break ;
@@ -114,20 +124,20 @@ int	ft_printf(const char *value, ...)
 	return (amount);
 }
 
-// int	main(void)
-// {
-// 	int r_original;
-// 	int r_myprint;
+int	main(void)
+{
+	int r_original;
+	int r_myprint;
 
-// 	r_original = 0;
-// 	r_myprint = 0;
+	r_original = 0;
+	r_myprint = 0;
 
-// 	r_myprint = ft_printf(" %%%% ");
-// 	printf("\n");
-// 	r_original = printf(" %%%% ");
-// 	printf("\n");
+	r_myprint = ft_printf(" %d", 20);
+	printf("\n");
+	r_original = printf(" %d", 20);
+	printf("\n");
 
-// 	printf("RETORNO ORIGINAL : %d\n", r_original);
-// 	printf("RETORNO MINHA PRINTF : %d\n", r_myprint);
-// 	return (0);
-// }
+	printf("RETORNO ORIGINAL : %d\n", r_original);
+	printf("RETORNO MINHA PRINTF : %d\n", r_myprint);
+	return (0);
+}
