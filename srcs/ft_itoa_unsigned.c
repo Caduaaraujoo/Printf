@@ -6,12 +6,12 @@
 /*   By: caredua3 <caredua3@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/25 10:20:42 by caredua3          #+#    #+#             */
-/*   Updated: 2023/11/25 10:27:48 by caredua3         ###   ########.fr       */
+/*   Updated: 2023/11/29 19:35:25 by caredua3         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../libft/libft.h"
 #include "../includes/ft_printf.h"
+#include "../libft/libft.h"
 
 static int	ft_len_string(unsigned int n)
 {

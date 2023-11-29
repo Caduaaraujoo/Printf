@@ -6,14 +6,12 @@
 /*   By: caredua3 <caredua3@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 18:58:04 by caredua3          #+#    #+#             */
-/*   Updated: 2023/11/25 10:39:21 by caredua3         ###   ########.fr       */
+/*   Updated: 2023/11/29 19:35:30 by caredua3         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
 #include "../libft/libft.h"
-#include <stdio.h>
-
 
 void	ft_putnbr_unsigned(unsigned int number, int fd)
 {
