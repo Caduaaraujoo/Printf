@@ -1,30 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putnbr_unsigned.c                               :+:      :+:    :+:   */
+/*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: caredua3 <caredua3@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/24 18:58:04 by caredua3          #+#    #+#             */
-/*   Updated: 2023/11/30 17:11:14 by caredua3         ###   ########.fr       */
+/*   Created: 2023/10/20 19:43:52 by caredua3          #+#    #+#             */
+/*   Updated: 2023/11/03 09:00:06 by caredua3         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
-
-void	ft_putnbr_unsigned(unsigned int number, int fd)
+int	ft_atoi(const char *nptr)
 {
-	char	c_char;
+	int	i;
+	int	signal;
+	int	base;
 
-	if (number <= 9)
-	{
-		c_char = number + '0';
-		ft_putchar_fd(c_char, fd);
-	}
-	else
-	{
-		c_char = (number % 10) + '0';
-		ft_putnbr_unsigned(number / 10, fd);
-		ft_putchar_fd(c_char, fd);
-	}
+	i = 0;
+	signal = 1;
+	base = 0;
+	while (nptr[i] == ' ' || (nptr[i] >= 9 && nptr[i] <= 13))
+		i++;
+	if (nptr[i] == '-' || nptr[i] == '+')
+		signal = 1 - 2 * (nptr[i++] == '-');
+	while ((nptr[i] >= '0' && nptr[i] <= '9') && nptr[i] != '\0')
+		base = base * 10 + nptr[i++] - '0';
+	return (base * signal);
 }

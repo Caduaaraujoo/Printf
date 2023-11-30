@@ -1,30 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putnbr_unsigned.c                               :+:      :+:    :+:   */
+/*   ft_strncmp.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: caredua3 <caredua3@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/24 18:58:04 by caredua3          #+#    #+#             */
-/*   Updated: 2023/11/30 17:11:14 by caredua3         ###   ########.fr       */
+/*   Created: 2023/10/19 15:09:12 by caredua3          #+#    #+#             */
+/*   Updated: 2023/11/03 09:04:52 by caredua3         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "libft.h"
 
-void	ft_putnbr_unsigned(unsigned int number, int fd)
+int	ft_strncmp(const char *s1, const char *s2, size_t n)
 {
-	char	c_char;
+	size_t	i;
 
-	if (number <= 9)
+	i = 0;
+	while ((s1[i] != '\0' || s2[i] != '\0') && i < n)
 	{
-		c_char = number + '0';
-		ft_putchar_fd(c_char, fd);
+		if (s1[i] != s2[i])
+			return ((unsigned char)s1[i] - (unsigned char)s2[i]);
+		i++;
 	}
-	else
-	{
-		c_char = (number % 10) + '0';
-		ft_putnbr_unsigned(number / 10, fd);
-		ft_putchar_fd(c_char, fd);
-	}
+	return (0);
 }

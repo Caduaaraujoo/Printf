@@ -1,30 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putnbr_unsigned.c                               :+:      :+:    :+:   */
+/*   ft_lstmap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: caredua3 <caredua3@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/24 18:58:04 by caredua3          #+#    #+#             */
-/*   Updated: 2023/11/30 17:11:14 by caredua3         ###   ########.fr       */
+/*   Created: 2023/11/02 14:22:39 by caredua3          #+#    #+#             */
+/*   Updated: 2023/11/03 08:11:16 by caredua3         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "libft.h"
 
-void	ft_putnbr_unsigned(unsigned int number, int fd)
+t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 {
-	char	c_char;
+	t_list	*n_list;
+	t_list	*n_node;
+	void	*set;
 
-	if (number <= 9)
+	if (lst == NULL)
+		return (NULL);
+	n_list = NULL;
+	while (lst)
 	{
-		c_char = number + '0';
-		ft_putchar_fd(c_char, fd);
+		set = f(lst->content);
+		n_node = ft_lstnew(set);
+		if (!n_node)
+		{
+			del(set);
+			ft_lstclear(&n_list, del);
+			return (NULL);
+		}
+		ft_lstadd_back(&n_list, n_node);
+		lst = lst->next;
 	}
-	else
-	{
-		c_char = (number % 10) + '0';
-		ft_putnbr_unsigned(number / 10, fd);
-		ft_putchar_fd(c_char, fd);
-	}
+	return (n_list);
 }

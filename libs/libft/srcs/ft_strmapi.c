@@ -1,30 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putnbr_unsigned.c                               :+:      :+:    :+:   */
+/*   ft_strmapi.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: caredua3 <caredua3@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/24 18:58:04 by caredua3          #+#    #+#             */
-/*   Updated: 2023/11/30 17:11:14 by caredua3         ###   ########.fr       */
+/*   Created: 2023/10/26 12:45:24 by caredua3          #+#    #+#             */
+/*   Updated: 2023/10/26 13:28:33 by caredua3         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "libft.h"
 
-void	ft_putnbr_unsigned(unsigned int number, int fd)
+char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 {
-	char	c_char;
+	char	*string;
+	size_t	index;
 
-	if (number <= 9)
+	index = 0;
+	string = ft_calloc((ft_strlen(s) + 1), sizeof(char));
+	if (string == NULL)
+		return (NULL);
+	while (index < ft_strlen(s))
 	{
-		c_char = number + '0';
-		ft_putchar_fd(c_char, fd);
+		string[index] = f(index, s[index]);
+		index++;
 	}
-	else
-	{
-		c_char = (number % 10) + '0';
-		ft_putnbr_unsigned(number / 10, fd);
-		ft_putchar_fd(c_char, fd);
-	}
+	return (string);
 }

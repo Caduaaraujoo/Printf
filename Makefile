@@ -1,36 +1,48 @@
-NAME = libftprintf.a
+HEADERS_PATH = ./includes/
+SRCS_PATH = ./srcs/
+OBJS_PATH = ./objs/
+LIBS_PATH = ./libs/
 
-HEADERS = ./includes/ft_printf.h
-
-SRC_FILES = ./srcs/ft_printf.c ./srcs/ft_putnbr_unsigned.c ./srcs/ft_itoa_unsigned.c srcs/ft_convert_dec_hex.c
-
-OBJS = $(SRC_FILES:.c=.o)
-
+CC = gcc
 FLAGS = -Wall -Wextra -Werror
 
-$(NAME): $(OBJS)
-	$(MAKE) -C ./libft
-	cp ./libft/libft.a $(NAME)
-	@ ar rcs $(NAME) $^
-	@ echo $(NAME) "successfully generated"
+RM = rm -f
+MKDIR = mkdir -p
 
-.PHONY: all
-all : $(NAME)
+NAME = libftprintf.a
+SRC_FILES = ft_printf.c \
+			ft_convert_dec_hex.c \
+			ft_itoa_unsigned.c \
+			ft_prefix_hex.c \
+			ft_putnbr_unsigned.c
+SOURCES = $(addprefix $(SRCS_PATH), $(SRC_FILES))
+OBJ_FILES = $(patsubst %.c, %.o, $(SRC_FILES))
+OBJECTS = $(addprefix $(OBJS_PATH), $(OBJ_FILES))
+EXECUTABLE = ft_printf_test
 
-%.o: %.c $(HEADERS)
-	@ echo "$< -> $@"
-	@ cc -c $< -o $@ $(FLAGS)
 
-.PHONY: clean
+all: $(NAME)
+
+$(NAME): $(OBJECTS)
+	@cd $(LIBS_PATH)libft && $(MAKE)
+	@cp $(LIBS_PATH)libft.a $(NAME)
+	@ar -rcs $(NAME) $(OBJECTS)
+
+
+$(OBJS_PATH)%.o : $(SRCS_PATH)%.c $(HEADERS_PATH)*.h
+	@$(MKDIR) $(OBJS_PATH)
+	@$(CC) $(FLAGS) -c $< -I $(HEADERS_PATH) -o $@
+
 clean:
-	$(MAKE) -C ./libft clean
-	@ rm -f ./srcs/*.o
-	@ echo "cleaned"
+	@$(RM) $(OBJECTS)
+	@cd $(LIBS_PATH)libft && $(MAKE) $@
 
-.PHONY: fclean
+
 fclean: clean
-	$(MAKE) -C ./libft fclean
-	@ rm -f $(NAME)
+	@$(RM) $(NAME)
+	@cd $(LIBS_PATH)libft && $(MAKE) $@
 
-.PHONY: re
+
 re: fclean all
+
+.PHONY: all run clean fclean re

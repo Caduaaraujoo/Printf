@@ -1,30 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putnbr_unsigned.c                               :+:      :+:    :+:   */
+/*   ft_strrchr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: caredua3 <caredua3@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/24 18:58:04 by caredua3          #+#    #+#             */
-/*   Updated: 2023/11/30 17:11:14 by caredua3         ###   ########.fr       */
+/*   Created: 2023/10/19 14:29:37 by caredua3          #+#    #+#             */
+/*   Updated: 2023/11/03 09:18:22 by caredua3         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "libft.h"
 
-void	ft_putnbr_unsigned(unsigned int number, int fd)
+char	*ft_strrchr(const char *s, int c)
 {
-	char	c_char;
+	int		last;
+	size_t	index;
 
-	if (number <= 9)
+	last = -1;
+	index = 0;
+	if (c > 255)
+		c %= 256;
+	if (c == '\0')
+		return (&((char *)s)[ft_strlen(s)]);
+	while (s[index])
 	{
-		c_char = number + '0';
-		ft_putchar_fd(c_char, fd);
+		if (s[index] == c)
+			last = index;
+		index++;
 	}
-	else
-	{
-		c_char = (number % 10) + '0';
-		ft_putnbr_unsigned(number / 10, fd);
-		ft_putchar_fd(c_char, fd);
-	}
+	if (last >= 0)
+		return (&((char *)s)[last]);
+	return (NULL);
 }

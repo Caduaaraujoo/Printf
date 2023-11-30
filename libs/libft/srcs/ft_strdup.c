@@ -1,30 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putnbr_unsigned.c                               :+:      :+:    :+:   */
+/*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: caredua3 <caredua3@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/24 18:58:04 by caredua3          #+#    #+#             */
-/*   Updated: 2023/11/30 17:11:14 by caredua3         ###   ########.fr       */
+/*   Created: 2023/10/21 16:36:23 by caredua3          #+#    #+#             */
+/*   Updated: 2023/11/03 09:23:42 by caredua3         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "libft.h"
 
-void	ft_putnbr_unsigned(unsigned int number, int fd)
+char	*ft_strdup(const char *s)
 {
-	char	c_char;
+	char	*new_string;
+	size_t	size;
 
-	if (number <= 9)
-	{
-		c_char = number + '0';
-		ft_putchar_fd(c_char, fd);
-	}
-	else
-	{
-		c_char = (number % 10) + '0';
-		ft_putnbr_unsigned(number / 10, fd);
-		ft_putchar_fd(c_char, fd);
-	}
+	size = ft_strlen(s);
+	new_string = (char *)malloc((size + 1) * sizeof(char));
+	if (new_string == NULL)
+		return (NULL);
+	ft_strlcpy(new_string, s, size + 1);
+	return (new_string);
 }

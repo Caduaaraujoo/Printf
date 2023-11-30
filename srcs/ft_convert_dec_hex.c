@@ -6,20 +6,19 @@
 /*   By: caredua3 <caredua3@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/25 11:57:42 by caredua3          #+#    #+#             */
-/*   Updated: 2023/11/29 19:35:21 by caredua3         ###   ########.fr       */
+/*   Updated: 2023/11/30 14:01:03 by caredua3         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/ft_printf.h"
-#include "../libft/libft.h"
+#include "ft_printf.h"
 
-static char	*ft_assemvly_hex(t_list *l_rest, char x)
+static char	*ft_assembly_hex(t_list *l_rest, char x)
 {
-	int i;
-	int	content_list;
+	int		i;
+	int		content_list;
 	char	*digits_hex;
 	char	*str;
-	t_list *current;
+	t_list	*current;
 
 	digits_hex = ft_strdup("0123456789abcdef");
 	str = ft_calloc(ft_lstsize(l_rest) + 1, sizeof(char));
@@ -28,7 +27,8 @@ static char	*ft_assemvly_hex(t_list *l_rest, char x)
 	while (current)
 	{
 		content_list = *((int *)current->content);
-		if (x == 'X' && (digits_hex[content_list] >= 'a' && digits_hex[content_list] <= 'f'))
+		if (x == 'X' && (digits_hex[content_list] >= 'a'
+				&& digits_hex[content_list] <= 'f'))
 			str[i] = (digits_hex[content_list] - 32);
 		else
 			str[i] = digits_hex[content_list];
@@ -41,10 +41,10 @@ static char	*ft_assemvly_hex(t_list *l_rest, char x)
 
 char	*ft_convert_dec_hex(unsigned long n, char x)
 {
-	unsigned long divider;
-	t_list *l_rest;
-	t_list *new_node;
-	char *str_hex;
+	unsigned long	divider;
+	t_list			*l_rest;
+	t_list			*new_node;
+	char			*str_hex;
 
 	divider = -1;
 	l_rest = NULL;
@@ -56,7 +56,7 @@ char	*ft_convert_dec_hex(unsigned long n, char x)
 		ft_lstadd_front(&l_rest, new_node);
 		n = divider;
 	}
-	str_hex = ft_assemvly_hex(l_rest, x);
+	str_hex = ft_assembly_hex(l_rest, x);
 	ft_lstclear(&l_rest, free);
 	ft_putstr_fd(str_hex, 1);
 	return (str_hex);

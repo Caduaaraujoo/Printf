@@ -1,30 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putnbr_unsigned.c                               :+:      :+:    :+:   */
+/*   ft_prefix_hex.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: caredua3 <caredua3@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/24 18:58:04 by caredua3          #+#    #+#             */
-/*   Updated: 2023/11/30 17:11:14 by caredua3         ###   ########.fr       */
+/*   Created: 2023/11/30 09:12:19 by caredua3          #+#    #+#             */
+/*   Updated: 2023/11/30 14:01:28 by caredua3         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void	ft_putnbr_unsigned(unsigned int number, int fd)
+char	*ft_prefix_hex(unsigned long hex)
 {
-	char	c_char;
+	char	*str;
+	char	*temp;
 
-	if (number <= 9)
+	if (hex == 0)
 	{
-		c_char = number + '0';
-		ft_putchar_fd(c_char, fd);
+		ft_putstr_fd("(nil)", 1);
+		str = ft_strdup("(nil)");
+		return (str);
 	}
-	else
-	{
-		c_char = (number % 10) + '0';
-		ft_putnbr_unsigned(number / 10, fd);
-		ft_putchar_fd(c_char, fd);
-	}
+	ft_putstr_fd("0x", 1);
+	temp = ft_convert_dec_hex(hex, 'x');
+	str = ft_strjoin("0x", temp);
+	free(temp);
+	return (str);
 }

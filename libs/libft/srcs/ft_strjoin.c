@@ -1,30 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putnbr_unsigned.c                               :+:      :+:    :+:   */
+/*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: caredua3 <caredua3@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/24 18:58:04 by caredua3          #+#    #+#             */
-/*   Updated: 2023/11/30 17:11:14 by caredua3         ###   ########.fr       */
+/*   Created: 2023/10/23 12:53:43 by caredua3          #+#    #+#             */
+/*   Updated: 2023/11/03 09:04:12 by caredua3         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "libft.h"
 
-void	ft_putnbr_unsigned(unsigned int number, int fd)
+char	*ft_strjoin(char const *s1, char const *s2)
 {
-	char	c_char;
+	char	*new_string;
+	size_t	len_s1;
+	size_t	len_s2;
 
-	if (number <= 9)
-	{
-		c_char = number + '0';
-		ft_putchar_fd(c_char, fd);
-	}
-	else
-	{
-		c_char = (number % 10) + '0';
-		ft_putnbr_unsigned(number / 10, fd);
-		ft_putchar_fd(c_char, fd);
-	}
+	len_s1 = ft_strlen(s1);
+	len_s2 = ft_strlen(s2);
+	new_string = (char *)malloc(len_s1 + len_s2 + 1);
+	if (new_string == NULL)
+		return (NULL);
+	ft_memcpy(new_string, s1, len_s1);
+	ft_memcpy(new_string + len_s1, s2, len_s2 + 1);
+	return (new_string);
 }
